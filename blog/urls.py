@@ -1,22 +1,43 @@
-"""
-URL configuration for blog project.
+from django.contrib import admin 
+from django.urls import path 
+from blog_app.views import main, my_feed, create, profile ,register, set_password, login, logout
+from django.urls import include
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
-from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', main), 
+    path('my_feed/', my_feed),
+    path('<int:article_id>/', include('blog_app.urls.urls')),
+    path('create/', create, name='create'),
+    path('topics/', include('blog_app.urls.topics_urls')),
+    path('profile/', profile, name='profile'),
+    path('register/', register, name='register'),
+    path('set-password/', set_password, name='set_password'),
+    path('login/', login, name='login'),
+    path('logout/', logout, name='logout'),
+
 ]
+"""
+
+
+/topics/ - Страница, с перечнем всех тем на сайте ?
+
+/topics/<topic_id>/ - Страница, со всеми статьями по определенной теме ?
+
+/topics/<topic_id>/subscribe/ - Адрес для подписки на конкретную тему
+
+/topics/<topic_id>/unsubscribe/ - Адрес для отписки от конкретной темы
+
+
+
+/<int:year>/<int:month>/ - страница, на которой будут статьи созданные в конкретный месяц. В случае запроса не настоящей даты, должна быть ошибка.
+
+Например:
+
+/2022/10/ - все хорошо
+/2059/12/ - тоже все хорошо, но статей нет
+/123/10/ - ошибка
+/123/14/ - ошибка
+/2020/22/ - ошибка
+"""
