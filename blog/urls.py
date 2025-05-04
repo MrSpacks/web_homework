@@ -1,6 +1,6 @@
 from django.contrib import admin 
 from django.urls import path 
-from blog_app.views import main, my_feed, create, profile ,register, set_password, login, logout
+from blog_app.views import main, my_feed, create, profile ,register, set_password, login, logout, articles_by_month
 from django.urls import include
 
 
@@ -16,18 +16,10 @@ urlpatterns = [
     path('set-password/', set_password, name='set_password'),
     path('login/', login, name='login'),
     path('logout/', logout, name='logout'),
+    path('<int:year>/<int:month>/', articles_by_month, name='articles_by_month'),
 
 ]
 """
-
-
-/topics/ - Страница, с перечнем всех тем на сайте ?
-
-/topics/<topic_id>/ - Страница, со всеми статьями по определенной теме ?
-
-/topics/<topic_id>/subscribe/ - Адрес для подписки на конкретную тему
-
-/topics/<topic_id>/unsubscribe/ - Адрес для отписки от конкретной темы
 
 
 
