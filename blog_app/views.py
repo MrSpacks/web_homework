@@ -4,12 +4,14 @@ from datetime import datetime
 from django.http import HttpResponse, HttpRequest
 
 
-def main(request: HttpRequest) -> HttpResponse:
-    return HttpResponse("main")
-
+def main(request):
+    return render(request, 'index.html')
 
 def my_feed(request: HttpRequest) -> HttpResponse:
-    return HttpResponse("my-feed")
+    return render(request, 'my_feed.html')
+
+def profile(request: HttpRequest) -> HttpResponse:
+    return render(request, 'profile.html')
 
 def article(request: HttpRequest, article_id: int) -> HttpResponse:
     return HttpResponse(f"article {article_id}")
@@ -26,8 +28,6 @@ def create(request: HttpRequest) -> HttpResponse:
 def topics(request: HttpRequest) -> HttpResponse:
     return HttpResponse("topics")
 
-def profile(request: HttpRequest) -> HttpResponse:
-    return HttpResponse("profile")
 
 def register(request: HttpRequest) -> HttpResponse:
     return HttpResponse("register")
