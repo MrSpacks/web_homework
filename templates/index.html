@@ -9,15 +9,21 @@
   </head>
   <body>
     <header>
-      <nav>
-        <ul class="nav">
-          <li><a class="nav_item" href="/">Мои статьи</a></li>
-          <li><a class="nav_item" href="/my_feed/">Все статьи</a></li>
-          <li><a class="nav_item" href="/profile/">Профиль</a></li>
-        </ul>
-      </nav>
+        <div class="container">
+            <nav>
+                 <ul class="nav">
+                      <li><a class="nav_item" href="/">Мои статьи</a></li>
+                      <li><a class="nav_item" href="/my_feed/">Все статьи</a></li>
+                      <li><a class="nav_item" href="/profile/">Профиль</a></li>
+                 </ul>
+            </nav>
+        </div>
     </header>
 
-    <main>{% block content %} {% endblock %}</main>
+    <main>
+        <div class="container">
+            {% block content %} {% endblock %}
+        </div>
+    </main>
   </body>
 </html>
