@@ -1,0 +1,14 @@
+{% extends 'index.html' %} 
+{% block title %}Все статьи{% endblock %} 
+{% block content %}
+<h1>Все статьи</h1>
+<p>Здесь вы можете просмотреть все статьи.</p>
+<!-- Здесь можно вывести список статей -->
+{% for article in articles %}
+    <h3>{{ article.title }}</h3>
+    <p>{{ article.content }}</p>
+    <p>Автор: {{ article.author.username }}</p>
+    <p>Дата публикации: {{ article.created_at }}</p>
+{% endfor %}
+
+{% endblock %}

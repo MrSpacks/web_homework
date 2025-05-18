@@ -11,9 +11,11 @@
     <header>
         <div class="container">
             <nav>
-                 <ul class="nav">
-                      <li><a class="nav_item" href="/">Мои статьи</a></li>
-                      <li><a class="nav_item" href="/my_feed/">Все статьи</a></li>
+                 <ul class="nav">                      
+                  
+                      <li><a class="nav_item" href="/all_articles">Все статьи</a></li>
+                      <li><a class="nav_item" href="/my_feed/">Мои статьи</a></li>
+                      <li><a class="nav_item" href="/create/">Создать статью</a></li>
                       <li><a class="nav_item" href="/profile/">Профиль</a></li>
                  </ul>
             </nav>
@@ -22,7 +24,11 @@
 
     <main>
         <div class="container">
-            {% block content %} {% endblock %}
+            {% block content %} 
+           
+                
+          
+            {% endblock %}
         </div>
     </main>
   </body>

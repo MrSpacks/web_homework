@@ -2,8 +2,11 @@
 {% block title %}Профиль{% endblock %} 
 {% block content %}
 <h1>Мой профиль</h1>
-<p>Имя пользователя: <strong>user123</strong></p>
-<p>Email: <strong>user@example.com</strong></p>
+<p>Имя: {{ user.username }}</p>
+<p>Электронная почта: {{ user.email }}</p>
+<p>Дата регистрации: {{ user.date_joined }}</p>
+<p>Последний вход: {{ user.last_login }}</p>
+<p>Статус: {{ user.is_active|yesno:"Активен,Неактивен" }}</p>
 
 <h2>Настройки</h2>
 <ul>

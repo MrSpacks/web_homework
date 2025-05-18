@@ -14,17 +14,19 @@ TOPIC_THEME_CHOICES = [
 ]
 class Topic(models.Model):
     """
-    Model representing a topic.
+    en: Model representing a topic.
+    ru: Модель, представляющая тему.
     """
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100,null=True, blank=True)
     theme = models.CharField( max_length=1, choices=TOPIC_THEME_CHOICES, default='8')
-    сreated_at = models.DateTimeField(auto_now_add=True)
+    сreated_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     def __str__(self):
         return self.name
     
 class Article(models.Model):
     """
-    Model representing an article.
+    en: Model representing an article.
+    ru: Модель, представляющая статью.
     """
     title = models.CharField(max_length=200)
     content = models.TextField()
@@ -36,7 +38,8 @@ class Article(models.Model):
     
 class Comment(models.Model):
     """
-    Model representing a comment on an article.
+    en: Model representing a comment on an article.
+    ru: Модель, представляющая комментарий к статье.
     """
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

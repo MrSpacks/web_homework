@@ -6,7 +6,8 @@ from django.http import HttpResponse, HttpRequest
 
 def main(request):
     return render(request, 'index.html')
-
+def all_articles(request: HttpRequest) -> HttpResponse:
+    return render(request, 'all_articles.html')
 def my_feed(request: HttpRequest) -> HttpResponse:
     return render(request, 'my_feed.html')
 
