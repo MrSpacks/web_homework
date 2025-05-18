@@ -2,14 +2,22 @@ from django.http import Http404
 from django.shortcuts import render
 from datetime import datetime
 from django.http import HttpResponse, HttpRequest
-
+from .models import Article
+from django.contrib.auth.decorators import login_required
+from .forms import ArticleForm
+from django.shortcuts import redirect
 
 def main(request):
     return render(request, 'index.html')
-def all_articles(request: HttpRequest) -> HttpResponse:
-    return render(request, 'all_articles.html')
-def my_feed(request: HttpRequest) -> HttpResponse:
-    return render(request, 'my_feed.html')
+# вывод всех статей
+def all_articles(request):
+    articles = Article.objects.all()
+    return render(request, 'all_articles.html', {'articles': articles})
+@login_required
+def my_feed(request):
+    user = request.user
+    articles = Article.objects.filter(author=user).order_by('-created_at')
+    return render(request, 'my_feed.html', {'articles': articles})
 
 def profile(request: HttpRequest) -> HttpResponse:
     return render(request, 'profile.html')
@@ -23,8 +31,20 @@ def update(request: HttpRequest, article_id: int) -> HttpResponse:
 def delete(request: HttpRequest, article_id: int) -> HttpResponse:
     return HttpResponse(f"delete {article_id}")
 
-def create(request: HttpRequest) -> HttpResponse:
-    return HttpResponse("create")
+# создание статьи
+@login_required
+def create(request):
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            article = form.save(commit=False)
+            article.author = request.user  # назначаем автора
+            article.save()
+            return redirect('my_feed')  # или другой путь
+    else:
+        form = ArticleForm()
+    
+    return render(request, 'create.html', {'form': form})
 
 def topics(request: HttpRequest) -> HttpResponse:
     return HttpResponse("topics")

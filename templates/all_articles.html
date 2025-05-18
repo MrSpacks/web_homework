@@ -5,10 +5,30 @@
 <p>Здесь вы можете просмотреть все статьи.</p>
 <!-- Здесь можно вывести список статей -->
 {% for article in articles %}
+<div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
     <h3>{{ article.title }}</h3>
     <p>{{ article.content }}</p>
     <p>Автор: {{ article.author.username }}</p>
     <p>Дата публикации: {{ article.created_at }}</p>
+      
+      <div style="display: flex" class="topic">
+     
+        {% if article.topics.all %}
+          <p style="padding-left: 10px">Темы:
+            {% for topic in article.topics.all %}
+            <p style="padding-left: 10px">{{ topic.name }}</p>
+          {% endfor %}
+          </p>
+        {% else %}
+          <p style="padding-left: 10px">Темы отсутствуют</p>
+        {% endif %}
+       
+      </div>
+</div>
+{% empty %}
+    <p>Статей пока нет.</p>
 {% endfor %}
+
+
 
 {% endblock %}

@@ -4,11 +4,12 @@ from blog_app.views import main, my_feed, create, profile ,register, set_passwor
 from django.urls import include
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main, name='main'),
     path('all_articles/', all_articles, name='all_articles'), 
-    path('my_feed/', my_feed),
+    path('my_feed/', my_feed , name='my_feed'),
     path('<int:article_id>/', include('blog_app.urls.urls')),
     path('create/', create, name='create'),
     path('topics/', include('blog_app.urls.topics_urls')),
