@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+{% block content %}
+<h2>Удалить статью "{{ article.title }}"?</h2>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Да, удалить</button>
+    <a href="{% url 'my_feed' %}">Отмена</a>
+</form>
+{% endblock %}

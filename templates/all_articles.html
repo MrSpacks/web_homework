@@ -5,9 +5,11 @@
 <p>Здесь вы можете просмотреть все статьи.</p>
 <!-- Здесь можно вывести список статей -->
 {% for article in articles %}
+
+<a href="{% url 'article_detail' article.id %}" style="text-decoration: none; color: inherit; ">
 <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
     <h3>{{ article.title }}</h3>
-    <p>{{ article.content }}</p>
+    <p>{{ article.content|truncatechars:200 }}</p>
     <p>Автор: {{ article.author.username }}</p>
     <p>Дата публикации: {{ article.created_at }}</p>
       
@@ -25,6 +27,8 @@
        
       </div>
 </div>
+</a>
+
 {% empty %}
     <p>Статей пока нет.</p>
 {% endfor %}

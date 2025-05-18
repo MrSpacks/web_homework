@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block content %}
+<h1>{{ article.title }}</h1>
+<p>{{ article.content }}</p>
+<p>Автор: {{ article.author.username }}</p>
+<p>Дата публикации: {{ article.created_at }}</p>
+
+{% if article.topics.all %}
+    <p>Темы:</p>
+    <ul>
+        {% for topic in article.topics.all %}
+            <li>{{ topic.name }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Темы отсутствуют</p>
+{% endif %}
+
+<a href="{% url 'all_articles' %}">← Назад к списку статей</a>
+{% endblock %}

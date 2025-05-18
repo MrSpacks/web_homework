@@ -1,12 +1,13 @@
 {% extends 'index.html' %}
 
 {% block title %}Создать статью{% endblock %}
-
 {% block content %}
+<div class="create">
 <h2>Создать новую статью</h2>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Опубликовать</button>
 </form>
+</div>
 {% endblock %}

@@ -50,3 +50,12 @@ header{
     background-color: #555;
     color: white;
 }
+.create{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}

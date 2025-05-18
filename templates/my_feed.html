@@ -26,6 +26,12 @@
       {% endif %}
      
     </div>
+    <a href="{% url 'edit_article' article.id %}">✏️ Редактировать</a>
+    <form action="{% url 'delete_article' article.id %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" onclick="return confirm('Удалить статью?')">🗑️ Удалить</button>
+    </form>
+    <hr>
   </div>  
   
 {% empty %}

@@ -6,6 +6,8 @@ from .models import Article
 from django.contrib.auth.decorators import login_required
 from .forms import ArticleForm
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 
 def main(request):
     return render(request, 'index.html')
@@ -13,6 +15,7 @@ def main(request):
 def all_articles(request):
     articles = Article.objects.all()
     return render(request, 'all_articles.html', {'articles': articles})
+# вывод статей по автору
 @login_required
 def my_feed(request):
     user = request.user
@@ -21,9 +24,33 @@ def my_feed(request):
 
 def profile(request: HttpRequest) -> HttpResponse:
     return render(request, 'profile.html')
-
-def article(request: HttpRequest, article_id: int) -> HttpResponse:
-    return HttpResponse(f"article {article_id}")
+# Редактирование статьи
+@login_required
+def edit_article(request, article_id):
+    article = get_object_or_404(Article, id=article_id, author=request.user)
+    
+    if request.method == 'POST':
+        form = ArticleForm(request.POST, instance=article)
+        if form.is_valid():
+            form.save()
+            return redirect('my_feed')
+    else:
+        form = ArticleForm(instance=article)
+    
+    return render(request, 'edit_article.html', {'form': form})
+# Удаление статьи
+@login_required
+def delete_article(request, article_id):
+    article = get_object_or_404(Article, id=article_id, author=request.user)
+    
+    if request.method == 'POST':
+        article.delete()
+        return redirect('my_feed')
+    
+    return render(request, 'delete_article.html', {'article': article})
+def article(request, article_id):
+    article = get_object_or_404(Article, id=article_id)
+    return render(request, 'article.html', {'article': article})
 def comment(request: HttpRequest, article_id: int) -> HttpResponse:
     return HttpResponse(f"comment {article_id}")
 def update(request: HttpRequest, article_id: int) -> HttpResponse:
